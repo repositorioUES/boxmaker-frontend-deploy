@@ -13,8 +13,10 @@ const base_url = environment.base_url;
 })
 export class CajaService {
 
-  //Objeto para comuncarse entre componentes suscritos al servicio
+  //Refrescar la tabla de comprobantes en el Home.component
   public $refreshTable = new BehaviorSubject<boolean>(false);
+  // Refrescar la tabla de cajas en Caja.component
+  public $refreshBoxesTable = new BehaviorSubject<boolean>(false);
   //Objeto para comuncarse entre componentes suscritos al servicio
   public $inserted = new BehaviorSubject<number>(-1);
   public $hasInserted = new BehaviorSubject<boolean>(false);

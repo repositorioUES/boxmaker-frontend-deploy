@@ -25,7 +25,7 @@ export class CajasComponent {
   public docType: number = 0 // PDF = 1 ; Excel = 2
 
   // Se suscribe para detecter cada vez que la variable $refreshTable cambie
-  public refresh = this.cajaSrv.$refreshTable.subscribe(data => {
+  public refresh = this.cajaSrv.$refreshBoxesTable.subscribe(data => {
     if(data == true)
       this.cargarCajas()
   });

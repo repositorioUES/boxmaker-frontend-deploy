@@ -44,7 +44,7 @@ export class CajaDialogComponent {
         progressAnimation: 'decreasing',
         positionClass: 'toast-top-right',
       });
-      this.cajaSrv.$refreshTable.next(true); //Emitir que se debe refrescar la tabla del CAJA.component
+      this.cajaSrv.$refreshBoxesTable.next(true); //Emitir que se debe refrescar la tabla del CAJA.component
     }, (err)=> {
         console.warn(err) 
         this.toast.error(err.msg, '', {
