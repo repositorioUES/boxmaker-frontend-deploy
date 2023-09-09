@@ -1,0 +1,53 @@
+<!-- loader con el logo de CEL -->
+<div class="loader center-container">
+  <table>
+      <tr style="vertical-align: middle;">
+          <td>
+              <div style="height: 20px;" class="center-container loader--image--rotate">
+                  <div class="loader--image--fade">
+                      <img src="../../../assets/images/logocel.png" class="loader--image--size">
+                  </div>
+              </div>
+              <br><br>
+              <br><br>
+              <div style="height: 20px;" class="center-container">
+                  <h1 class="loader--text--fade big-text">B<img src="../../../assets/images/logocel.png" style="height: 30px; width: 30px;">x Maker</h1>
+                  <!-- <h1 class="loader--image--fade big-text ">Box Maker</h1> -->
+              </div>
+          </td>
+      </tr>
+  </table>
+</div>
+<!-- ---------------------------------------------------------------------------------------------------------------------------------------- -->
+
+<div class="component-class">
+  <div class="center-container">
+    <div class="center-content">
+      <mat-card class="custom-color">
+        <div class="container text-center"><br>
+          <img src="../../../assets/images/login.png" width="100" height="100">
+        </div>
+
+        <h1 class="text-center">Inicio de sesión</h1>
+        <form (ngSubmit)="login()" autocomplete="off" [formGroup]="loginForm">
+
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Nombre de usuario</mat-label>
+            <input formControlName="userName" id="username"  type="text" matInput placeholder="Digite su nombre de usuario">
+          </mat-form-field>
+
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Contraseña</mat-label>
+            <input formControlName="password" id="password" type="password" matInput placeholder="Digite su contraseña">
+          </mat-form-field>
+          <br>
+
+          <div class="justify-content-end">
+            <button type="submit" mat-raised-button color="primary">Iniciar sesión</button>
+            <br><br>
+          </div>
+        </form>
+      </mat-card>
+    </div>
+  </div>
+</div>

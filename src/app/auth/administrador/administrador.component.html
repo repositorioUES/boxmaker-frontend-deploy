@@ -1,0 +1,175 @@
+
+<!-- loader con el logo de CEL -->
+    <div class="loader center-container">
+        <table>
+            <tr style="vertical-align: middle;">
+                <td>
+                    <div style="height: 20px;" class="center-container loader--image--rotate">
+                        <div class="loader--image--fade">
+                            <img src="../../../assets/images/logocel.png" class="loader--image--size">
+                        </div>
+                    </div>
+                    <br><br>
+                    <br><br>
+                    <div style="height: 20px;" class="center-container">
+                        <h1 class="loader--text--fade big-text">B<img src="../../../assets/images/logocel.png" style="height: 30px; width: 30px;">x Maker</h1>
+                        <!-- <h1 class="loader--image--fade big-text ">Box Maker</h1> -->
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+<!-- ---------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+
+<div class="component-class">
+
+    <div class="center-header " >
+        <table>
+            <tr >
+                <td style="width: 500px; align-items: center;">
+                    <h3 style="color: white;"><strong>MANTENIMIENTO DE USUARIOS </strong></h3>
+                </td>
+                <td>
+                    <mat-form-field style="margin-top: 10px;">
+                        <mat-label>Filtrar Usuarios</mat-label>
+                        <input matInput  (keyup)="applyFilter($event)" placeholder="Buscar..." #input>
+                    </mat-form-field>
+                </td>
+            </tr>
+        </table>
+    </div>
+    
+    <div class="center-container">
+        <table >
+            <tr>
+                <td style="width: 500; padding-right: 20px;">
+                    <app-register (usuarioAgregado)="cargarUsuarios()"></app-register>
+                </td>
+                <td>
+                    <div >
+                        <div class="center-container">
+                            <mat-card class="custom-color scroll-container" >
+                                <table mat-table [dataSource] = "dataSource" class = "mat-elevation-z8 " >
+
+                                    <ng-container matColumnDef = "Admin">
+                                    <th mat-header-cell *matHeaderCellDef>Admin</th>
+                                    <td mat-cell *matCellDef = "let element" style="align-items: center;"> 
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" 
+                                        viewBox="0 0 16 16" style="color: rgb(255, 217, 0);" *ngIf="element.tipo == 0" >
+                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                        </svg>
+                                    </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef = "Nombre">
+                                    <th mat-header-cell *matHeaderCellDef>Nombre</th>
+                                    <td mat-cell *matCellDef = "let element"> {{element.primerNombre}} {{element.primerApellido}} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef = "Nombre de Usuario">
+                                    <th mat-header-cell *matHeaderCellDef>Nombre Usuario</th>
+                                    <td mat-cell *matCellDef = "let element"> {{element.userName}} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef = "Fec. Creación">
+                                    <th mat-header-cell *matHeaderCellDef>Fec. Creación</th>
+                                    <td mat-cell *matCellDef = "let element"> {{element.fechaCreacion | date:'dd/MM/yyyy' }} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef = "Estado">
+                                    <th mat-header-cell *matHeaderCellDef>Estado</th>
+                                    <td mat-cell *matCellDef = "let element" >
+                                            <p *ngIf="element.activo" style="margin: 0%;">
+                                                <button type="button" class="btn btn-success" (click)="changeState(element)" matTooltip="Cambiar estado de {{element.userName}}  Actualmente: ACTIVO">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-check" viewBox="0 0 16 16">
+                                                        <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.708l.547.548 1.17-1.951a.5.5 0 1 1 .858.514ZM11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"></path>
+                                                        <path d="M8.256 14a4.474 4.474 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10c.26 0 .507.009.74.025.226-.341.496-.65.804-.918C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4s1 1 1 1h5.256Z"></path>
+                                                    </svg>
+                                                </button>
+                                            </p>
+                                            <p *ngIf="!element.activo" style="margin: 0%;">
+                                                <button type="button" class="btn btn-outline-danger" (click)="changeState(element)" matTooltip="Cambiar estado de {{element.userName}}  Actualmente: INACTIVO">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-slash" viewBox="0 0 16 16">
+                                                        <path d="M13.879 10.414a2.501 2.501 0 0 0-3.465 3.465l3.465-3.465Zm.707.707-3.465 3.465a2.501 2.501 0 0 0 3.465-3.465Zm-4.56-1.096a3.5 3.5 0 1 1 4.949 4.95 3.5 3.5 0 0 1-4.95-4.95ZM11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm.256 7a4.474 4.474 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10c.26 0 .507.009.74.025.226-.341.496-.65.804-.918C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4s1 1 1 1h5.256Z"></path>
+                                                    </svg>
+                                                </button>
+                                            </p>
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef = "Bloqueo">
+                                        <th mat-header-cell *matHeaderCellDef>Bloqueo</th>
+                                        <td mat-cell *matCellDef = "let element"> 
+                                            <p *ngIf="element.bloqueado" align="center" style="margin: 0%;">
+                                                <button type="button" class="btn btn-outline-danger" (click)="unlock(element)" matTooltip="{{element.userName}} Actualmente: BLOQUEADO">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
+                                                        <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"></path>
+                                                    </svg>
+                                                </button>
+                                            </p>
+                                            <p *ngIf="!element.bloqueado and element.tipo != 0" align="center" style="margin: 0%;">
+                                                <button type="button" class="btn btn-success" (click)="unlock(element)" matTooltip="{{element.userName}} Actualmente: DESBLOQUEADO">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-unlock" viewBox="0 0 16 16">
+                                                        <path d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2zM3 8a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1H3z"></path>
+                                                    </svg>
+                                                </button>
+                                            </p>
+                                        </td>
+                                    </ng-container> 
+
+                                    <ng-container matColumnDef = "Contraseña">
+                                    <th mat-header-cell *matHeaderCellDef>Contraseña</th>
+                                        <td mat-cell *matCellDef = "let element">
+                                            <p align="center" style="margin: 0%;" (click)="resetPassword(element._id, element.userName)">
+                                                <button type="button" class="btn btn-outline-danger" matTooltip="Resetear Contraseña de {{element.userName}}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"></path>
+                                                        <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"></path>
+                                                    </svg>
+                                                </button>
+                                            </p>
+                                        </td>
+                                    </ng-container> 
+
+                                    <ng-container matColumnDef = "Editar">
+                                        <th mat-header-cell *matHeaderCellDef>Editar</th>
+                                        <td mat-cell *matCellDef = "let element">
+                                            <p align="center" style="margin: 0%;" (click)="openDialog(element)">
+                                                <button type="button" class="btn btn-outline-primary" matTooltip="Editar datos de {{element.userName}}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                                        <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"></path>
+                                                    </svg>
+                                                </button>
+                                            </p>
+                                        </td>
+                                    </ng-container> 
+
+                                    <ng-container matColumnDef = "Eliminar">
+                                        <th mat-header-cell *matHeaderCellDef>Eliminar</th>
+                                        <td mat-cell *matCellDef = "let element"> 
+                                            <p align="center" style="margin: 0%;"> 
+                                                <button type="button" class="btn btn-outline-danger" (click)="deleteUser(element)" matTooltip="Eliminar a {{element.userName}}">
+                                                    <svg  xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"></path>
+                                                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"></path>
+                                                    </svg>
+                                                </button>
+                                            </p>
+                                        </td>
+                                    </ng-container> 
+
+                                    <tr mat-header-row style="height: 50px;" *matHeaderRowDef = "displayedColumns; sticky: true"></tr>
+                                    <tr mat-row style="height: 50px;" *matRowDef = "let row; columns: displayedColumns;"></tr>
+                                </table>
+                            </mat-card>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+

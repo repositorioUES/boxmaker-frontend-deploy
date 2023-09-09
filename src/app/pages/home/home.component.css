@@ -1,0 +1,203 @@
+.custom-width {
+    margin-left: 0%;
+    margin-right: 0%;
+  }
+
+  .new-row {
+    animation: blinkColor 0.80s infinite alternate;
+  }
+  
+  .exist-row {
+    animation: blinkExist 0.80s infinite alternate;
+  }
+
+  .custom-color {
+    background-color: #00275a; /* Cambia el color de fondo a azul */
+    color: white; /* Cambia el color del texto a blanco */
+  }
+
+  .example-container {
+    height: 410px;
+    overflow: auto;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  .custom-border{
+    border-radius: 0.1px;
+  }
+
+  .custom-font-size {
+    font-size: 11.5px;
+  }
+
+  .center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+  }
+
+  .center-content {
+    text-align: center;
+  }
+
+  .mat-mdc-row:hover .mat-mdc-cell {
+    /* border-color: currentColor; */
+    background-color: rgb(231, 231, 231);
+  }
+
+  .text-color{
+    color: white;
+  }
+
+  .custom-border-bottom{
+    margin-bottom: 1px;
+    border-radius: 10px;
+    border-color: rgb(245, 0, 0);
+    border-width: 100px;
+  }
+
+  .separator{
+    padding-top: 5px;
+  }
+
+
+  .custom-ancho-input{
+    width: 142px;
+  }
+
+.custom-offset{
+  margin-right: 77px;
+}
+
+.big-text {
+  font-size:200%;
+  font-weight: bold;
+  color: rgb(0, 22, 95);
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.shadow{
+  filter: drop-shadow(5px 5px 10px black);
+}
+
+.warn--shadow{
+  filter: drop-shadow(5px 5px 10px rgb(255, 123, 0));
+}
+
+.center-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input--{
+  margin-top: 1px;
+  margin-bottom: 3px;
+  margin-right: 10px;
+  width: 80px;
+}
+
+.input--clave{
+  width: 53px;
+}
+
+.input--fecha{
+  width: 120px;
+}
+
+.input--err{
+  background-color: rgb(255, 148, 148);
+}
+
+/* Opciones para el loader ======================================================================*/
+.loader{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f1f1f1;
+  z-index: 99998;
+  transition: opacity 0.5s, visibility 0.5s;
+}
+
+.loader--2{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  transition: opacity 0.5s, visibility 0.5s;
+}
+
+.loader--hidden{
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loader--image--size{
+  animation: scaleImage 1.8s infinite;
+}
+
+.loader--image--fade{
+  animation: fadeImage 1.81s infinite;
+}
+
+.loader--image--rotate{
+  animation: rotateImage 1.8s infinite;
+}
+
+.warning--fade{
+  animation: fadeWarn 1s infinite alternate;
+}
+
+.loader--text--fade{
+  animation: fadeText 2.5s infinite;
+}
+
+@keyframes fadeText {
+  from { opacity: 0;}
+  to { opacity: 1;}
+}
+
+@keyframes scaleImage {
+  from { height: 5px; width: 5px;}
+  to { height: 175px; width: 175px;}
+}
+
+@keyframes fadeImage {
+  from { opacity: 1;}
+  to { opacity: 0;}
+}
+
+@keyframes rotateImage {
+  from { transform: rotate(0turn);}
+  to { transform: rotate(1turn);}
+}
+
+@keyframes fadeWarn {
+  from { opacity: 1;}
+  to { opacity: 0.4;}
+}
+
+@keyframes blinkColor {
+  from { background-color: rgb(255, 184, 184);}
+  to { background-color: white;}
+}
+
+@keyframes blinkExist {
+  from { background-color: rgb(170, 196, 252);}
+  to { background-color: white;}
+}
+

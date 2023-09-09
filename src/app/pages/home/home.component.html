@@ -1,0 +1,416 @@
+<!–------------------------------------------------- Loaders para Reportes y logo de CEL -------------------------------------------------–>
+
+<!-- loader con el logo de CEL -->
+<div class="loader center-container">
+  <table>
+      <tr style="vertical-align: middle;">
+          <td>
+              <div style="height: 20px;" class="center-container loader--image--rotate">
+                  <div class="loader--image--fade">
+                      <img src="../../../assets/images/logocel.png" class="loader--image--size">
+                  </div>
+              </div>
+              <br><br>
+              <br><br>
+              <div style="height: 20px;" class="center-container">
+                  <h1 class="loader--text--fade big-text">B<img src="../../../assets/images/logocel.png" style="height: 30px; width: 30px;">x Maker</h1>
+                  <!-- <h1 class="loader--image--fade big-text ">Box Maker</h1> -->
+              </div>
+          </td>
+      </tr>
+  </table>
+</div>
+<!-- ---------------------------------------------------------------------------------------------------------------------------------------- -->
+
+<!-- loader de Generar un Reprote una accion -->
+<mat-card class="center-content" *ngIf="generando == 1">
+  <div class="mb-1 row loader--2">
+      <table >
+          <tr style="vertical-align: middle;">
+              <td>
+                  <div style="height: 50px;" class="mb-1 row">
+                      <div *ngIf="loadingType == 1">
+                          <img src="../../../assets/images/loading-red.gif" style="height: 200px; width: 400px; border-radius: 5%;" class="shadow" >
+                      </div>
+                      <div *ngIf="loadingType == 2">
+                          <img src="../../../assets/images/loading-green.gif" style="height: 200px; width: 400px; border-radius: 5%;" class="shadow" >
+                      </div>
+                      <div *ngIf="loadingType == 3">
+                          <img src="../../../assets/images/deleting.gif" style="height: 200px; width: 400px; border-radius: 5%;" class="shadow" >
+                      </div>
+                      <div *ngIf="loadingType == 4">
+                          <img src="../../../assets/images/document-loader.gif" style="height: 300px; width: 400px; border-radius: 5%; background-color: white;" class="shadow" >
+                      </div>
+                      <div *ngIf="loadingType == 5">
+                          <img src="../../../assets/images/fileloading.gif" style="height: 300px; width: 400px; border-radius: 5%; background-color: white;" class="shadow" >
+                      </div>
+                  </div>
+              </td>
+          </tr>
+          <tr >
+              <td>
+                  <div style="height: 20px;" class="mb-1 row">
+                      <h1 *ngIf="loadingType == 1" class="loader--image--fade big-text " style="color: red; margin-top: 100px;">Generando...</h1>
+                      <h1 *ngIf="loadingType == 2" class="loader--image--fade big-text " style="color: green; margin-top: 100px;">Generando...</h1>
+                      <!-- <h1 *ngIf="loadingType == 3" class="loader--image--fade big-text " style="color: rgb(255, 17, 0);">Borrando...</h1> -->
+                      <h1 *ngIf="loadingType == 4" class="loader--image--fade big-text " style="color: rgb(0, 0, 0); margin-top: 200px;">Cargando Caja...</h1>
+                      <h1 *ngIf="loadingType == 5" class="loader--image--fade big-text " style="color: rgb(0, 0, 0); margin-top: 200px;">Guardando...</h1>
+                  </div>
+              </td>
+          </tr>
+      </table>
+  </div>
+</mat-card>
+
+<!–---------------------------------------------------------- Creacion de la caja ----------------------------------------------------------–>
+<mat-card class="custom-width custom-border">
+  <div class="container mt-6 border custom-border-bottom custom-color separator">
+    <form autocomplete="off" [formGroup]="cajaForm" >
+      <h4>ÁREA DE ANALISIS CONTABLE (388)</h4>
+      <div class="mb-1 row">
+
+        <!– Input para la descripcion de la caja –>
+        <label for="descripcion" class="col-sm-1 col-form-label">Descripción</label>
+        <div class="col-sm-6">
+          <input formControlName="descripcion" type="text" class="form-control form-control-sm" id="descripcion"
+            name="descripcion" />
+        </div>
+
+        <!– Input para el Grupo de la caja –>
+        <label for="grupo" class="col-sm-1 col-form-label offset-sm-1">Grupo</label>
+        <div class="col-sm-1">
+          <input formControlName="grupo" type="text" class="form-control form-control-sm" id="grupo" name="grupo" />
+        </div>
+      </div>
+
+      <div class="mb-1 row">
+        <!– Input para el codigo de la caja –>
+        <label for="codigo" class="col-sm-1 col-form-label">Código</label>
+        <div class="col-sm-1">
+          <input formControlName="codigo" type="text" class="form-control form-control-sm custom-font-size" id="codigo"
+            name="codigo" (keyup)="upperCase()"/>
+        </div>
+
+        <!– Input para la fecha de caducidad de la caja –>
+        <label for="fecha" class="col-sm-1 col-form-label">Caducidad</label>
+        <div class="col-sm-1">
+          <input formControlName="caducidad" type="text" class="form-control form-control-sm custom-font-size" id="caducidad"
+            name="caducidad" [value]="cajaForm.get('caducidad')?.value" />
+        </div>
+
+        <!– Botón Para limpiar el formulario de la caja –>
+        <div class="col-sm-1">
+          <button type="reset" class="btn btn-sm btn-warning" (click)="clearAll()">
+            <i class="fa fa-close" aria-hidden="true"></i>
+            Limpiar
+          </button>
+        </div>
+
+        <!– Botón para buscar caja –>
+        <div class="col-sm-1">
+          <button class="btn btn-sm btn-primary" (click)="cargarCaja('')">
+            <i class="fa fa-search" aria-hidden="true"></i>
+            Buscar
+          </button>
+        </div>
+
+        <!– Botón Guardar caja–>
+        <div class="col-sm-2">
+          <button class="btn btn-sm btn-primary" (click)="crearCaja()">
+            <i class="fa fa-archive" aria-hidden="true"></i>
+            Guardar
+          </button>
+        </div>
+
+        <!– Input para el Estante de la caja –>
+        <label for="estante" class="col-sm-1 col-form-label">Estante</label>
+        <div class="col-sm-1">
+          <input formControlName="estante" type="text" class="form-control form-control-sm" id="estante" name="estante" />
+        </div>
+
+        <!– Input para el nivel de la caja –>
+        <label for="nivel" class="col-sm-1 col-form-label">Nivel</label>
+        <div class="col-sm-1">
+          <input formControlName="nivel" type="text" class="form-control form-control-sm" id="nivel" name="nivel" />
+        </div>
+      </div>
+    </form>
+  </div>
+</mat-card>
+
+<!–---------------------------------------------------------- Ingreso de comprobantes --------------------------------------------------------------–>
+<mat-card class="custom-width custom-border">
+
+  <div class="container mt-6 border custom-border-bottom custom-color separator">
+    <table>
+      <tr>
+        <!-- BOTON DE FIJAR/SOLTAR----------------------------------------------------------------------------------------------------------------- -->
+        <td align="center">
+          <div *ngIf="!fixed">
+            <button type="button" class="btn btn-sm btn-success" style="width: 80px;" matTooltip="Usar campos con valores fijos" (click)="toggleFields()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pin-angle" viewBox="0 0 16 16">
+                <path d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a5.927 5.927 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707-.195-.195.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a5.922 5.922 0 0 1 1.013.16l3.134-3.133a2.772 2.772 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146zm.122 2.112v-.002.002zm0-.002v.002a.5.5 0 0 1-.122.51L6.293 6.878a.5.5 0 0 1-.511.12H5.78l-.014-.004a4.507 4.507 0 0 0-.288-.076 4.922 4.922 0 0 0-.765-.116c-.422-.028-.836.008-1.175.15l5.51 5.509c.141-.34.177-.753.149-1.175a4.924 4.924 0 0 0-.192-1.054l-.004-.013v-.001a.5.5 0 0 1 .12-.512l3.536-3.535a.5.5 0 0 1 .532-.115l.096.022c.087.017.208.034.344.034.114 0 .23-.011.343-.04L9.927 2.028c-.029.113-.04.23-.04.343a1.779 1.779 0 0 0 .062.46z"/>
+              </svg>
+              Fijar
+            </button>
+          </div>
+          <div *ngIf="fixed">
+            <button type="button" class="btn btn-sm btn-danger" style="width: 80px;" matTooltip="Usar campos de inserción normales" (click)="toggleFields()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pin-fill" viewBox="0 0 16 16">
+                <path d="M4.146.146A.5.5 0 0 1 4.5 0h7a.5.5 0 0 1 .5.5c0 .68-.342 1.174-.646 1.479-.126.125-.25.224-.354.298v4.431l.078.048c.203.127.476.314.751.555C12.36 7.775 13 8.527 13 9.5a.5.5 0 0 1-.5.5h-4v4.5c0 .276-.224 1.5-.5 1.5s-.5-1.224-.5-1.5V10h-4a.5.5 0 0 1-.5-.5c0-.973.64-1.725 1.17-2.189A5.921 5.921 0 0 1 5 6.708V2.277a2.77 2.77 0 0 1-.354-.298C4.342 1.674 4 1.179 4 .5a.5.5 0 0 1 .146-.354z"/>
+              </svg>
+              Soltar
+            </button>
+          </div>
+        </td>
+        <!-- INPUTS DE COMPRBANTE FIJOS----------------------------------------------------------------------------------------------------------------- -->
+        <td *ngIf="fixed" style="width: 450px;"> 
+             <!-- FILA SUPERIOR -->
+            <tr>
+              <td>
+                  <div class="input--">
+                    <input type="text" autocomplete="off" class="form-control form-control-sm" id="tipoFijo" name="tipoFijo" (keyup)="$event.keyCode != 13 ? autoCompletar($event.keyCode) : null"
+                      placeholder="Tipo"  [(ngModel)]="comprob.tipoFixed" (keyup.enter)=" nextInput('claveFija')" />
+                  </div>
+              </td>
+              <td class="input--clave">
+                <div class="input-- input--clave">
+                  <input type="text" autocomplete="off" maxlength="2" class="form-control form-control-sm" id="claveFija" name="claveFija"
+                    placeholder="Clave"  [(ngModel)]="comprob.claveFixed" (keyup.enter)=" nextInput('fechaFija')" (keyup)="$event.keyCode != 13 ? upperCaseComp(comprob.claveFixed,'claveFija') : null"/>
+                </div>
+              </td>
+              <td>
+
+              </td>
+              <td class="input--">
+                <div class="input--">
+                  <input type="text" autocomplete="off" maxlength="7" class="form-control form-control-sm" id="fechaFija" name="fechaFija"
+                    placeholder="MM/yyyy"  [(ngModel)]="comprob.fechaResto" (keyup.enter)=" nextInput( 'dia')"
+                    (keypress)="$event.keyCode != 13 ? numbersOnly($event.keyCode) : null" />
+                </div>
+              </td>
+            </tr>
+            <!-- FILA INFERIOR -->
+            <tr>
+              <td>
+                  <div class="input--">
+                    <input type="text" autocomplete="off" class="form-control form-control-sm" style="background-color: rgb(187, 187, 187);" id="tipo" name="tipo" 
+                      placeholder="Tipo" disabled [(ngModel)]="comprob.tipo" />
+                  </div>
+              </td>
+              <td class="input--clave">
+                <div class="input-- input--clave">
+                  <input  type="text" autocomplete="off" maxlength="2" style="background-color: rgb(187, 187, 187);" class="form-control form-control-sm" id="clave" name="clave"
+                    placeholder="Clave" disabled [(ngModel)]="comprob.clave" />
+                </div>
+              </td>
+              <td class="input--clave">
+                <div class="input-- input--clave">
+                  <input ype="text" maxlength="2" class="form-control form-control-sm" id="dia" name="dia"
+                    placeholder="Día" autocomplete="off" [(ngModel)]="comprob.fechaDia" (keyup.enter)=" nextInput( 'correlativo')"
+                    (keypress)="$event.keyCode != 13 ? numbersOnly($event.keyCode) : null"/>
+                </div>
+              </td>
+              <td class="input--">
+                <div class="input--">
+                  <input type="text" autocomplete="off" maxlength="7" style="background-color: rgb(187, 187, 187);" class="form-control form-control-sm" id="fechaResto" name="fechaResto"
+                    placeholder="MM/yyyy" disabled [(ngModel)]="comprob.fechaResto" />
+                </div>
+              </td>
+              <td>
+                <div class="input--">
+                  <input  type="text" autocomplete="off" maxlength="4" class="form-control form-control-sm" id="correlativo" name="correlativo"
+                    placeholder="N° Interno"  [(ngModel)]="comprob.correlativo" (keyup.enter)="ingresarComprobantes()"
+                    (keypress)="$event.keyCode != 13 ? numbersOnly($event.keyCode) : null"/>
+                </div>
+              </td>
+            </tr>
+        </td>
+
+        <td *ngIf="!fixed" style="width: 450px;"> 
+            <!-- FILA UNICA  SIN VALORES FIJOS -->
+            <tr>
+              <td>
+                  <div class="input--">
+                    <input type="text" autocomplete="off" class="form-control form-control-sm" id="tipo" name="tipo" (keyup)="$event.keyCode != 13 ? autoCompletar($event.keyCode) : null" 
+                      placeholder="Tipo"  [(ngModel)]="comprob.tipo" (keyup.enter)=" nextInput( 'clave')"/>
+                  </div>
+              </td>
+              <td class="input--clave">
+                <div class="input-- input--clave">
+                  <input  type="text" autocomplete="off" maxlength="2" class="form-control form-control-sm" id="clave" name="clave"
+                    placeholder="Clave"  [(ngModel)]="comprob.clave" (keyup.enter)=" nextInput( 'fecha')" (keyup)="$event.keyCode != 13 ? upperCaseComp(comprob.clave,'clave') : null"/>
+                </div>
+              </td>
+              <td class="input--fecha">
+                <div class="input-- input--fecha">
+                  <input  type="date" autocomplete="off" class="form-control form-control-sm" id="fecha" name="fecha"
+                    placeholder="Fecha"  [(ngModel)]="comprob.fecha" (keyup.enter)=" nextInput( 'correlativo')"/>
+                </div>
+              </td>
+              <td>
+                <div class="input--">
+                  <input type="text" autocomplete="off" maxlength="4" class="form-control form-control-sm" id="correlativo" name="correlativo"
+                    placeholder="N° Interno"  [(ngModel)]="comprob.correlativo" (keyup.enter)=" nextInput( 'tipo')"
+                    (keypress)="$event.keyCode != 13 ? numbersOnly($event.keyCode) : null" (keyup.enter)="ingresarComprobantes()"/>
+                </div>
+              </td>
+            </tr>
+        </td>
+        
+        <!-- Contador de la cantidad de comprobantes en el JSON de la caja -->
+        <!-- <td  align="left" >
+            <h3 ><strong>Comprobantes: {{ longitud }}</strong></h3>
+        </td> -->
+        
+        <!-- Botones de QUEDAN y BORRAR TODO -->
+        <td align="right">
+            <div style="margin-top: 4px;">
+              <button type="button" class="btn btn-sm btn-primary" (click)="cargarQuedan()" style="width: 115px;">
+                <i class="fa fa-plus-square" aria-hidden="true"></i>
+                Quedan
+              </button>
+            </div>
+
+            <div style="margin-top: 4px; margin-bottom: 4px;">
+              <button type="button" class="btn btn-sm btn-danger" (click)="vaciarCaja()">
+                <i class="fa fa-times" aria-hidden="true"></i> Borrar Todos
+              </button>
+            </div>
+        </td>
+        
+        <!-- Botones de PDF y RXCEL -->
+        <td align="center">
+            <div style="margin-top: 4px; margin-right: 30px;">
+              <button type="button" class="btn btn-sm btn-danger" (click)="generatePDF()" style="width: 120px;">
+                <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                Reporte PDF
+              </button>
+            </div>
+
+            <div style="margin-top: 4px; margin-right: 30px; margin-bottom: 4px;">
+              <button type="button" class="btn btn-sm btn-success" (click)="generateXLSX()">
+                <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+                Reporte Excel
+              </button>
+            </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+</mat-card>
+
+<!–-------------------------------------------------------------- TABLA DE DATOS --------------------------------------------------------------–>
+
+<mat-card class="custom-width custom-border">
+  <div class="container mt-6 border custom-border-bottom custom-color">
+    <br />
+    <section class="example-container mat-elevation-z8"  #tabla tabindex="0" >
+      <table class="table custom-table-style" mat-table [dataSource]="contenidos" id="tabla" style="margin-bottom: 0%;">
+        <!-- Position Column -->
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef>No.</th>
+          <td mat-cell *matCellDef="let element let i = index">
+            {{ i + 1 }}
+
+              <span id="intermedio" *ngIf="hasInserted && i == insertado"></span>
+              <span id="existe" style="margin: 0%;" *ngIf="existe && i == donde"></span>
+          </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="tipo">
+          <th mat-header-cell *matHeaderCellDef>Tipo</th>
+          <td mat-cell *matCellDef="let element">{{ element.tipo }}</td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="clave">
+          <th mat-header-cell *matHeaderCellDef>Clave</th>
+          <td mat-cell *matCellDef="let element">{{ element.clave }}</td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="fecha">
+          <th mat-header-cell *matHeaderCellDef>fecha</th>
+          <td mat-cell *matCellDef="let element let i = index">{{ element.fecha | date: 'dd/MM/yyyy'}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="comprobante">
+          <th mat-header-cell *matHeaderCellDef>N° Comprobante</th>
+          <td mat-cell *matCellDef="let element">{{ element.correlativo }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Insertar">
+          <th mat-header-cell *matHeaderCellDef>Insertar</th>
+          <td mat-cell *matCellDef="let element let i = index">
+            <button type="button" (click)="insertarDebajo(i)" class="btn btn-outline-primary" matTooltip="Insertar Debajo" *ngIf="i != (longitud - 1)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-bar-down" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1 3.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5zM8 6a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 .708-.708L7.5 12.293V6.5A.5.5 0 0 1 8 6z"></path>
+              </svg>
+            </button>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Quitar">
+          <th mat-header-cell *matHeaderCellDef>Quitar</th>
+          <td mat-cell *matCellDef="let element let i= index">
+            <button type="button" (click)="quitarUno(i)" class="btn btn-outline-danger" matTooltip="Quitar Comprobante" >
+              <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" class="bi bi-dash-circle-fill" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7z"></path>
+              </svg>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row let i = index; columns: displayedColumns" ng [ngClass]="{'new-row': ((i == insertado) && hasInserted),'exist-row': ((i == donde))}"></tr>
+      </table>
+      <!-- Ancla para hacer el scroll hasta abajo -->
+      <div>
+
+      </div>
+      <span id="final"></span>
+    </section>
+    
+    <br />
+    <table>
+      <tr>
+        <td  align="right">
+          <div class="alert alert-warning center-header warning--fade warn--shadow" role="alert"  *ngIf="unsaved"
+          style="height: 40px; width: 600px; margin-left: 50px; margin-right: 50px; margin-bottom: 0px;justify-content: center;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-exclamation-diamond" viewBox="0 0 16 16">
+                <path d="M6.95.435c.58-.58 1.52-.58 2.1 0l6.515 6.516c.58.58.58 1.519 0 2.098L9.05 15.565c-.58.58-1.519.58-2.098 0L.435 9.05a1.482 1.482 0 0 1 0-2.098L6.95.435zm1.4.7a.495.495 0 0 0-.7 0L1.134 7.65a.495.495 0 0 0 0 .7l6.516 6.516a.495.495 0 0 0 .7 0l6.516-6.516a.495.495 0 0 0 0-.7L8.35 1.134z"/>
+                <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+            </svg>
+            .      Hay cambios sin guardar en la tabla de Comprobantes
+          </div>
+        </td>
+        <td   align="right">
+          <div *ngIf="!unsaved">
+            <button type="submit" class="btn btn-primary" (click)="guardarContenidos()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-check" viewBox="0 0 16 16">
+                <path d="M10.854 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 8.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
+              </svg>
+              Guardado
+            </button>
+          </div>
+          <div *ngIf="unsaved">
+            <button type="submit" class="btn btn-danger" (click)="guardarContenidos()" >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-arrow-down" viewBox="0 0 16 16">
+                <path d="M8 5a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 9.293V5.5A.5.5 0 0 1 8 5z"/>
+                <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
+              </svg>
+              Guardar
+            </button>
+          </div>
+        </td>
+      </tr>
+    </table>
+    <!-- <div class="text-end">
+      <button type="submit" class="btn btn-primary" (click)="guardarContenidos()" >Guardar</button>
+    </div> -->
+    <br />
+  </div>
+</mat-card>

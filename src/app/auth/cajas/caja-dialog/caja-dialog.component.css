@@ -1,0 +1,11 @@
+
+button {
+    margin-right: 8px;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+    border-color: currentColor;
+    background-color: rgb(231, 231, 231);
+    width: fit-content;
+  }
+  

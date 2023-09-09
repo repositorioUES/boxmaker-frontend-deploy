@@ -1,0 +1,65 @@
+
+
+<h1 mat-dialog-title>Datos de la Caja: {{data.caja.codigo}}</h1>
+<div mat-dialog-content>
+    <div>
+        <div>
+            <h3><strong>Elaborada por: {{data.caja.usuario }}</strong></h3>
+        </div>
+        <table class="table">
+            <tbody>
+              <tr>
+                <td>
+                    <tr>
+                        <th scope="row">Entidad: </th>
+                        <td>{{data.caja.entidad }}</td>
+                    </tr>
+                </td>
+                <td>
+                    <tr>
+                        <th scope="row">Fecha Creación: </th>
+                        <td>{{data.caja.fechaCreacion | date: 'dd/MM/yyyy'}}</td>
+                    </tr>
+                </td>
+                <td>
+                    <tr>
+                        <th scope="row">Caducidad: </th>
+                        <td>{{data.caja.caducidad | date: 'dd/MM/yyyy'}}</td>
+                    </tr>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                    <tr>
+                        <th scope="row">Grupo: </th>
+                        <td>  {{data.caja.grupo }}</td>
+                    </tr>
+                </td>
+                <td>
+                    <tr>
+                        <th scope="row">Estante: </th>
+                        <td>  {{data.caja.estante}}</td>
+                    </tr>
+                </td>
+                <td>
+                    <tr>
+                        <th scope="row">Nivel: </th>
+                        <td>  {{data.caja.nivel}}</td>
+                    </tr>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+    <div >
+        <mat-form-field style="width: 800px;">
+          <mat-label>Descripción</mat-label>
+          <input matInput  [(ngModel)]="data.caja.descripcion" (keypress)="$event.keyCode == 13 ? updateBox(data.caja) : null" >
+        </mat-form-field>
+    </div>
+</div>
+<div mat-dialog-actions align="center">
+  <button  (click)="onNoClick()" class="btn btn-danger" id="btn-close">Cerrar</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <button  (click)="updateBox(data.caja)" 
+    class="btn btn-primary" id="btn-save">Guardar</button>
+</div>

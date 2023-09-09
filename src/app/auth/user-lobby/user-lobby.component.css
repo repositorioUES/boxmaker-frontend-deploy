@@ -1,0 +1,118 @@
+
+
+.full-width{
+    margin-left: 1%;
+  }
+  
+  .center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+  }
+  
+  .center-content {
+    text-align: center;
+  }
+
+  .custom-border{
+    border-radius: 5%;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    /* background-color: #001fa8; */
+    background-image: url("../../../assets/images/waves_2.png"); 
+    background-size: cover; 
+  }
+
+  .component-class {
+    width: 100%;
+    height: 92%;
+    background-image: url("../../../assets/images/waves.png"); 
+    background-size: cover; 
+  }
+
+  .custom-color {
+    background-color: #ffffff; /* Cambia el color de fondo a azul (#007bff) */
+    /* color: rgb(0, 0, 0); Cambia el color del texto a blanco */
+  }
+
+  .big-text {
+    font-size:200%;
+    font-weight: bold;
+    color: rgb(0, 22, 95);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+
+  .fade--in{
+    animation: fadeIn 1s normal;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0;}
+    to { opacity: 1;}
+  }
+
+  
+  .big-text-menu {
+    font-size:500%;
+    font-weight: bold;
+    color: rgb(0, 22, 95);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+
+  /* Opciones para el loader ======================================================================*/
+  .loader{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f1f1f1;
+    z-index: 99998;
+    transition: opacity 0.5s, visibility 0.5s;
+  }
+  
+  .loader--hidden{
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .loader--image--size{
+    animation: scaleImage 1.8s infinite;
+  }
+
+  .loader--image--fade{
+    animation: fadeImage 1.81s infinite;
+  }
+
+  .loader--image--rotate{
+    animation: rotateImage 1.8s infinite;
+  }
+
+  .loader--text--fade{
+    animation: fadeText 2.5s infinite;
+  }
+  
+  @keyframes fadeText {
+    from { opacity: 0;}
+    to { opacity: 1;}
+  }
+  
+  @keyframes scaleImage {
+    from { height: 5px; width: 5px;}
+    to { height: 175px; width: 175px;}
+  }
+  
+  @keyframes fadeImage {
+    from { opacity: 1;}
+    to { opacity: 0;}
+  }
+  
+  @keyframes rotateImage {
+    from { transform: rotate(0turn);}
+    to { transform: rotate(1turn);}
+  }
+

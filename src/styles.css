@@ -1,0 +1,55 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-size: xx-small; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: #f5f5f5;}
+
+
+
+
+
+/* Opciones para el loader ======================================================================*/
+.loader{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f1f1f1;
+    z-index: 99999;
+    transition: opacity 0.5s, visibility 0.5s;
+  }
+  
+  .loader--hidden{
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .loader--image--size{
+    animation: scaleImage 1.8s infinite;
+  }
+
+  .loader--image--fade{
+    animation: fadeImage 1.81s infinite;
+  }
+
+  .loader--image--rotate{
+    animation: rotateImage 1.8s infinite;
+  }
+
+  @keyframes scaleImage {
+    from { height: 5px; width: 5px;}
+    to { height: 175px; width: 175px;}
+  }
+  
+  @keyframes fadeImage {
+    from { opacity: 1;}
+    to { opacity: 0;}
+  }
+  
+  @keyframes rotateImage {
+    from { transform: rotate(0turn);}
+    to { transform: rotate(1turn);}
+  }

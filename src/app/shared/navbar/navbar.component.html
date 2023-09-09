@@ -1,0 +1,59 @@
+<div>
+  <mat-toolbar class="custom-color ">
+
+
+    <a [routerLink]="'/'" matTooltip="Ir a inicio">
+      <img src="../../../assets/images/logocel_blanco.png" width="65" height="65" alt="Descripción de la imagen">
+    </a>
+
+    <div class="centered-container custom-margin">
+      <h2 class="big-text custom-margin">CEL</h2>
+      <h5 class="custom-margin">DEPARTAMENTO DE CONTABILIDAD</h5>
+      <h5 class="custom-margin">ÁREA DE ANÁLISIS CONTABLE</h5>
+    </div>
+
+    <span class="example-spacer"></span>
+
+    <img src="../../../assets/images/carretilla.png" width="60" height="60" alt="">
+
+    <div class="centered-container">
+      <h2>Módulo General</h2>
+      <h2>Inventario de Comprobantes Contables - Archivo de Contabilidad</h2>
+    </div>
+
+<!--     <img src="../../../assets/images/caja.ico" width="50" height="50" alt=""> -->
+
+    <span class="example-spacer"></span>
+    <span class="example-spacer"></span>
+
+    <div class="centered-container">
+      <h4>{{ currentTime | date:'dd/MM/yyyy' }}</h4>
+      <h4>{{ usuario | uppercase }}</h4>
+    </div>
+
+    <a *ngIf="isLoggedIn && tipo =='0' " [routerLink]="'/auth/admin-lobby'" mat-icon-button class="example-icon favorite-icon"
+       aria-label="Example icon-button with heart icon" matTooltip="Perfil">
+      <mat-icon>construction</mat-icon>
+    </a>
+
+    <a *ngIf="isLoggedIn && tipo =='1' " [routerLink]="'/auth/user-lobby'" mat-icon-button class="example-icon favorite-icon"
+       aria-label="Example icon-button with heart icon" matTooltip="Perfil">
+      <mat-icon>construction</mat-icon>
+    </a>
+
+    <a *ngIf="!isLoggedIn"
+    [routerLink]="'/login'" mat-icon-button class="example-icon favorite-icon"
+      aria-label="Example icon-button with heart icon" matTooltip="Iniciar sesión">
+      <mat-icon>person</mat-icon>
+    </a>
+
+
+
+    <a *ngIf="isLoggedIn"
+      (click)="logout()" style="margin-right: 30px" mat-icon-button class="example-icon favorite-icon mr5 ml10"
+      aria-label="Example icon-button with heart icon" matTooltip="Cerrar sesión">
+      <mat-icon>logout</mat-icon>
+    </a>
+
+  </mat-toolbar>
+</div>

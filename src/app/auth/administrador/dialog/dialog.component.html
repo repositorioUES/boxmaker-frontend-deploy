@@ -1,0 +1,54 @@
+<h1 mat-dialog-title>Datos del Usuario: {{data.userName}}</h1>
+<div mat-dialog-content>
+    <div >
+        <mat-form-field>
+          <mat-label>Primer Nombre</mat-label>
+          <input matInput [(ngModel)]="data.primerNombre" (keypress)="$event.keyCode == 13 ? nextInput( 'segModal' ,$event.keyCode) : null" >
+        </mat-form-field>
+        &nbsp;&nbsp;
+        <mat-form-field>
+          <mat-label>Segundo Nombre</mat-label>
+          <input matInput id="segModal" [(ngModel)]="data.segundoNombre" (keypress)="$event.keyCode == 13 ? nextInput( 'apModal' ,$event.keyCode) : null">
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field>
+          <mat-label>Primer Apellido</mat-label>
+          <input matInput id="apModal" [(ngModel)]="data.primerApellido" (keypress)="$event.keyCode == 13 ? nextInput( 'ap2Modal' ,$event.keyCode) : null">
+        </mat-form-field>
+        &nbsp;&nbsp;
+        <mat-form-field>
+          <mat-label>Segundo Apellido</mat-label>
+          <input matInput id="ap2Modal" [(ngModel)]="data.segundoApellido" (keypress)="$event.keyCode == 13 ? upadateUser(data) : null">
+        </mat-form-field>
+    </div>
+    <div>
+        <p>Correo Electrónico: {{data.email}}</p>
+        <p>Caducidad de Contraseña: {{data.passCaducidad}}</p>
+    </div>
+    <div class="center-container " style="vertical-align: middle;">
+      <mat-checkbox [checked]="checked" name="chk" color="warn" (change)="onChange()" >
+        <label for="chk" style="justify-content: center; align-items: center;">
+          <h3 style="margin: 0%; padding: 0%;" *ngIf="data.tipo == 1"><strong>¿Convertir a {{data.userName }} en Administrador?</strong></h3>
+          <h3 style="margin: 0%; padding: 0%;" *ngIf="data.tipo == 0"><strong>¿Que {{data.userName }} ya no sea Administrador?</strong></h3>
+        </label>
+      </mat-checkbox>
+    </div>
+    <div *ngIf="checked == true">
+      <p><strong>Para realizar ésta acción debe ingresar su Contraseña</strong></p>
+      <mat-form-field>
+        <mat-label>Contraseña Actual</mat-label>
+        <input matInput [(ngModel)]="data.password" type="password" (keypress)="$event.keyCode == 13 ? nextInput( 'confirmModal' ,$event.keyCode) : null" >
+      </mat-form-field>
+      &nbsp;&nbsp;
+      <mat-form-field>
+        <mat-label>Confirmar Contraseña</mat-label>
+        <input matInput id="confirmModal" type="password" [(ngModel)]="data.confirmPassword" (keypress)="$event.keyCode == 13 ? upadateUser(data) : null">
+      </mat-form-field>
+    </div>
+</div>
+<div mat-dialog-actions align="center">
+  <button  (click)="onNoClick()" class="btn btn-danger" id="btn-close">Cerrar</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <button  (click)="upadateUser(data)" 
+    class="btn btn-primary" id="btn-save">Guardar</button>
+</div>

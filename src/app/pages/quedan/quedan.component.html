@@ -1,0 +1,64 @@
+<h1 mat-dialog-title>Caja: {{data.codigo}} - Búsqueda de Comprobantes por QUEDAN </h1>
+<div mat-dialog-content>
+
+  <div >
+    <mat-form-field style="margin-left: 10px;">
+      <mat-label>Fecha Inicio</mat-label>
+      <input type="date" matInput  [(ngModel)]="datos.fInicio" (keyup)="$event.keyCode == 13 ? nextInput( 'finalInput' ,$event.keyCode) : null">
+    </mat-form-field>
+    &nbsp;&nbsp;
+    <mat-form-field>
+      <mat-label>Fecha Final</mat-label>
+      <input type="date"  matInput id="finalInput" [(ngModel)]="datos.fFinal" (keyup)="$event.keyCode == 13 ? nextInput( 'quedanInput' ,$event.keyCode) : null">
+    </mat-form-field>
+    &nbsp;&nbsp;
+    <mat-form-field style="margin-right: 10px;">
+      <mat-label>Quedan</mat-label>
+      <input type="number" matInput id="quedanInput" [(ngModel)]="datos.quedan" (keyup)="$event.keyCode == 13 ? getQuedan(datos.quedan, datos.fInicio, datos.fFinal) : null">
+    </mat-form-field>
+
+    <button class="btn btn-primary" (click)="getQuedan(datos.quedan, datos.fInicio, datos.fFinal)" id="btn-save"> 
+      <i class="fa fa-search" aria-hidden="true"></i>
+      Buscar
+    </button>
+
+  </div>
+
+  <div class="scroll-container">
+    <table class="table table-hover table-sm ">
+      <thead>
+        <tr>
+          <th scope="col" *ngIf="elegidos.length != 0">
+            <mat-checkbox [checked]="mainChecked" (change)="toggleAll()" color="primary">
+            </mat-checkbox>
+          </th>
+          <th scope="col">#</th>
+          <th scope="col">Quedan</th>
+          <th scope="col">Tipo Documento</th>
+          <th scope="col">Clave</th>
+          <th scope="col">Fecha</th>
+          <th scope="col">N° Interno</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let comp of elegidos, let i = index" style="margin: 0%;">
+          <td style="margin: 0%;">
+            <mat-checkbox [checked]="comp.marked" (change)="selectedItems(comp)" color="primary">
+            </mat-checkbox>
+          </td>
+          <td class="center-content">{{ i + 1 }}</td>
+          <td class="center-content">{{comp.comprobante.quedan}}</td>
+          <td class="center-content">{{comp.comprobante.tipo}}</td>
+          <td class="center-content">{{comp.comprobante.clave}}</td>
+          <td class="center-content">{{comp.fecha}}</td>
+          <td class="center-content">{{comp.comprobante.correlativo}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+    
+</div>
+<div mat-dialog-actions align="center">
+  <button class="btn btn-danger" id="btn-close"  (click)="onNoClick()" >Cerrar</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <button class="btn btn-primary" id="btn-save" (click)="trasladar(data.codigo)">Trasladar</button>
+</div>
