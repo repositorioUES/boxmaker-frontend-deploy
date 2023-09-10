@@ -31,6 +31,7 @@ export class HomeComponent implements OnInit {
   // dataSource = ELEMENT_DATA;
 
   /* ----------------------------------------------------------------------------------------------------------------- */
+  public userInSession = localStorage.getItem('usuario')?.replace(/"+/g,'')
 
   /* Form para los campos de la caja */
   public cajaForm = this.fb.group({
@@ -41,7 +42,7 @@ export class HomeComponent implements OnInit {
     estante: [''],
     nivel: [''],
     numero: [''],
-    usuario: [localStorage.getItem('usuario')?.replace(/"+/g,'')],
+    usuario: [this.userInSession],
   });
 
   /* Inicializar el boton */
@@ -76,7 +77,7 @@ export class HomeComponent implements OnInit {
     private fb: FormBuilder,
     private cajaService: CajaService,
     private toastr: ToastrService,
-    private dialog: MatDialog,
+    private dialog: MatDialog
   ) {}
 
   // Se suscribe para detectar cada vez que la variable $refreshTable cambie
@@ -125,10 +126,22 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     document.getElementById('codigo')?.focus()
     this.hideLoader()
+    this.userInSession = localStorage.getItem('usuario')?.replace(/"+/g,'')
   }
 
   /* Funcion que permite CREAR una caja y CARGAR sus datos en el formulario */
   crearCaja() {
+    if(this.cajaForm.value.usuario == null || this.cajaForm.value.usuario == undefined || this.cajaForm.value.usuario == ""){
+      console.log('no hay nombre de usuario');
+      this.toastr.error('Ha ocurrido un error con el Nombre de Usuario. Intente cerrar sesión y volver a entrar', '', {
+        timeOut: 5000,
+        progressBar: true,
+        progressAnimation: 'decreasing',
+        positionClass: 'toast-top-right',
+      });
+      return
+    }
+
     this.cajaService.crearCaja(this.cajaForm.value).subscribe(
       (resp: any) => {
 
@@ -146,7 +159,7 @@ export class HomeComponent implements OnInit {
           usuario: resp.caja.usuario,
         });
 
-        if(resp.from === 'update'){ // Si la respuesta viene del metodo de "Guardar"
+        if(resp.from != null && resp.from != undefined){ // Si la respuesta viene del metodo de "Guardar"
           //Podemos ejecutar solo si tenemos una caja cargada
           if(this.hasBox() == false){
             return
@@ -168,7 +181,7 @@ export class HomeComponent implements OnInit {
   cargarCaja(from: string) {
     const formData = this.cajaForm.value;
     const codigo = formData.codigo;
-
+    
     if (codigo) {
       if(from != 'borrado'){
         this.generando = 1

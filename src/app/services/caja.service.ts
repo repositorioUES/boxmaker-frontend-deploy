@@ -15,6 +15,7 @@ export class CajaService {
 
   //Refrescar la tabla de comprobantes en el Home.component
   public $refreshTable = new BehaviorSubject<boolean>(false);
+  public $refreshFromInsert = new BehaviorSubject<boolean>(false);
   // Refrescar la tabla de cajas en Caja.component
   public $refreshBoxesTable = new BehaviorSubject<boolean>(false);
   //Objeto para comuncarse entre componentes suscritos al servicio

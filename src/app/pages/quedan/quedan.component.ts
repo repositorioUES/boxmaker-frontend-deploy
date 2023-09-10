@@ -6,10 +6,8 @@ import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/materia
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { FormBuilder, FormsModule } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormsModule } from '@angular/forms';
 import { QuedanService } from 'src/app/services/quedan.service';
-import { Dialog } from '@angular/cdk/dialog';
 import { Comprobante } from 'src/app/models/comprobante.model';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { ToastrService } from 'ngx-toastr';

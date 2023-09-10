@@ -92,7 +92,7 @@ export class InsertarComponent {
         });
       }
 
-      this.cajaSrv.$refreshTable.next(true); //Emitir que se debe refrescar la tabla del home.component
+      this.cajaSrv.$refreshFromInsert.next(true); //Emitir que se debe refrescar la tabla del home.component
 
       this.cajaSrv.$inserted.next(data.index); //Emitir que se debe resaltar la fila insertada en la tabla del home.component
       this.cajaSrv.$hasInserted.next(true);
