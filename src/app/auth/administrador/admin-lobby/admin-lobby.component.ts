@@ -3,9 +3,9 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Usuario } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
-import { DialogComponent } from '../dialog/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { PasswordDialogComponent } from '../../password-dialog/password-dialog.component';
+
 
 @Component({
   selector: 'app-admin-lobby',

@@ -135,7 +135,6 @@ export class HomeComponent implements OnInit {
         /* mensaje de exito */
         this.exito(resp);
 
-
         this.cajaForm.setValue({
           descripcion: resp.caja.descripcion,
           codigo: resp.caja.codigo,
@@ -144,7 +143,7 @@ export class HomeComponent implements OnInit {
           estante: resp.caja.estante,
           nivel: resp.caja.nivel,
           numero: resp.caja.numero,
-          usuario: resp.caja.usuario || '',
+          usuario: resp.caja.usuario,
         });
 
         if(resp.from === 'update'){ // Si la respuesta viene del metodo de "Guardar"
@@ -190,7 +189,7 @@ export class HomeComponent implements OnInit {
           estante: resp.caja.estante,
           nivel: resp.caja.nivel,
           numero: resp.caja.numero,
-          usuario: resp.caja.usuario ||'',
+          usuario: resp.caja.usuario,
         });
 
         this.generando = 0

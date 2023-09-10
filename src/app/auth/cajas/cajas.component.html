@@ -131,7 +131,7 @@
                             <td mat-cell *matCellDef="let element">
                                 <p align="center" style="margin: 0%;" (click)="updateBox(element)">
                                     <button type="button" class="btn btn-outline-primary"
-                                        matTooltip="Editar datos de {{element.userName}}">
+                                        matTooltip="Editar datos de {{element.codigo}}">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                             fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
                                             <path
@@ -149,7 +149,7 @@
                                 <p align="center" style="margin: 0%;">
                                     <button type="button" class="btn btn-outline-danger"
                                         (click)="deleteBox(element.codigo)"
-                                        matTooltip="Eliminar a {{element.userName}}">
+                                        matTooltip="Eliminar a {{element.codigo}}">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                             fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                             <path
