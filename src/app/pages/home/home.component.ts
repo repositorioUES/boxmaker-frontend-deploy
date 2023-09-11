@@ -354,7 +354,7 @@ export class HomeComponent implements OnInit {
 
       },
       (err) => {
-        if (err.error.donde) {
+        if (err.error.donde >= 0) {
           // this.hasInserted = false
           this.donde = err.error.donde
           this.existe = true
