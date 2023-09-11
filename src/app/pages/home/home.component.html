@@ -311,10 +311,11 @@
         <ng-container matColumnDef="position">
           <th mat-header-cell *matHeaderCellDef>No.</th>
           <td mat-cell *matCellDef="let element let i = index">
+            <span id="intermedio" *ngIf="hasInserted && i == insertado"></span>
+            <span id="existe" style="margin: 0%;" *ngIf="existe && i == donde"></span>
+            
             {{ i + 1 }}
 
-              <span id="intermedio" *ngIf="hasInserted && i == insertado"></span>
-              <span id="existe" style="margin: 0%;" *ngIf="existe && i == donde"></span>
           </td>
         </ng-container>
 
