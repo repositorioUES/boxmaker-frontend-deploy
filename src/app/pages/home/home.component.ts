@@ -279,7 +279,7 @@ export class HomeComponent implements OnInit {
         }
 
         if(!this.existe && !this.hasInserted){
-          document.getElementById('final')?.scrollIntoView(true)
+          document.getElementById('final')?.scrollIntoView({ block: "center"})
         }
         // Fin SCROLL -----------------------------------------------------------------------------
 
