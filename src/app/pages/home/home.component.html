@@ -356,7 +356,7 @@
         <ng-container matColumnDef="Quitar">
           <th mat-header-cell *matHeaderCellDef>Quitar</th>
           <td mat-cell *matCellDef="let element let i= index">
-            <button type="button" (click)="quitarUno(i)" class="btn btn-outline-danger" matTooltip="Quitar Comprobante" *ngIf="i <= longitud">
+            <button type="button" (click)="quitarUno(i)" class="btn btn-outline-danger" matTooltip="Quitar Comprobante" *ngIf="i < longitud">
               <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" class="bi bi-dash-circle-fill" viewBox="0 0 16 16">
                 <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7z"></path>
               </svg>
@@ -367,12 +367,7 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
         <tr mat-row *matRowDef="let row let i = index; columns: displayedColumns" ng [ngClass]="{'new-row': ((i == insertado) && hasInserted),'exist-row': ((i == donde))}"></tr>
       </table>
-      <div style="height: 5px;">
       
-      </div>
-      <div  style="height: 5px;">
-
-      </div>
       <div  style="height: 5px;">
         <span id="final"></span>
       </div>
