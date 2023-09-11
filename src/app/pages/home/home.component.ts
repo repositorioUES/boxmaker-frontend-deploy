@@ -272,9 +272,9 @@ export class HomeComponent implements OnInit {
         })
 
         this.contenidos = resp.contenido // Obtener los contenidos del json
-        this.contenidos.push(extra)
         this.longitud =  this.contenidos.length
         this.cantidad =  resp.cantidad
+        this.contenidos.push(extra)
 
         // Si los del JSON != a los de la BD entonces hay cambios sin guardar
         if (this.cantidad != this.contenidos.length)
