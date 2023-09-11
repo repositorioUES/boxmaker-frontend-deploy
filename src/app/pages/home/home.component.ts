@@ -261,7 +261,18 @@ export class HomeComponent implements OnInit {
         this.generando = 0
         this.loadingType = 0
 
+        const extra: Comprobante = ({
+          caja: '',
+          quedan: '',
+          tipo: '',
+          clave: '',
+          fecha: '',
+          correlativo: '',
+          _id: '',
+        })
+
         this.contenidos = resp.contenido // Obtener los contenidos del json
+        this.contenidos.push(extra)
         this.longitud =  this.contenidos.length
         this.cantidad =  resp.cantidad
 
