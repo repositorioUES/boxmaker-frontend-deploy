@@ -360,9 +360,6 @@
               <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" class="bi bi-dash-circle-fill" viewBox="0 0 16 16">
                 <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7z"></path>
               </svg>
-             <!-- Ancla para hacer el scroll hasta abajo -->
-              <span *ngIf="i == longitud" id="final"></span>
-              
             </button>
           </td>
         </ng-container>
@@ -370,6 +367,15 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
         <tr mat-row *matRowDef="let row let i = index; columns: displayedColumns" ng [ngClass]="{'new-row': ((i == insertado) && hasInserted),'exist-row': ((i == donde))}"></tr>
       </table>
+      <div style="height: 5px;">
+      
+      </div>
+      <div  style="height: 5px;">
+
+      </div>
+      <div  style="height: 5px;">
+        <span id="final"></span>
+      </div>
     </section>
     
     <br />
