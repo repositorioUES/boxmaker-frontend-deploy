@@ -88,6 +88,14 @@ export class HomeComponent implements OnInit {
     }
   });
 
+  // Se suscribe para detectar cada vez que la variable $refreshTable cambie
+  private refreshIn = this.cajaService.$refreshFromInsert.subscribe(data => {
+    if (data == true) {
+      this.unsaved = true
+      this.cargarContenidos()
+    }
+  });
+
   // Se suscribe para detectar cada vez que la variable $inserted cambie
   private posicion = this.cajaService.$inserted.subscribe(valor => {
     this.insertado = valor + 1
