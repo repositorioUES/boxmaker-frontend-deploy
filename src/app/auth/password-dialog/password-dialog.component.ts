@@ -28,7 +28,7 @@ export interface DialogData {
 @Component({
   selector: 'app-password-dialog',
   templateUrl: './password-dialog.component.html',
-  styles: [],
+  styleUrls: ['./password-dialog.component.css'],
   standalone: true,
   imports: [MatDialogModule, MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule, DatePipe, NgIf],
 })

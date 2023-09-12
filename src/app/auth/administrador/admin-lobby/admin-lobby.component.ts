@@ -5,6 +5,7 @@ import { Usuario } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { PasswordDialogComponent } from '../../password-dialog/password-dialog.component';
+import { getLocaleFirstDayOfWeek } from '@angular/common';
 
 
 @Component({
@@ -66,7 +67,7 @@ export class AdminLobbyComponent implements OnInit{
       this.daysLeft = resp.warning.dias
       this.expiration = resp.warning.fecha
 
-      if (resp.firstLogin == true) {
+      if (resp.firstLogin == true &&  this.loggedUser.userName != 'ADMIN') {
         console.log('msg: ');
         this.changePassword('   Es necesario que Cambie su Contraseña') 
       }
