@@ -67,7 +67,7 @@ export class AdminLobbyComponent implements OnInit{
       this.expiration = resp.warning.fecha
 
       if (resp.firstLogin == true) {
-        // console.log('msg: ');
+        console.log('msg: ');
         this.changePassword('   Es necesario que Cambie su Contraseña') 
       }
 
