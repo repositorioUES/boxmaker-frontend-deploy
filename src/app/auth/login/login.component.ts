@@ -32,10 +32,22 @@ export class LoginComponent implements OnInit{
       .subscribe(resp => {
         if (resp.ok === true) {
 
-          if(resp.tipo == 0)
+          if(resp.tipo == 0){
+            this.router.events.subscribe(event => {
+              if (event instanceof NavigationEnd && this.router.url === '/auth/admin-lobby') {
+                window.location.reload();
+              }
+            });
             this.router.navigateByUrl('/auth/admin-lobby');
-          else
+          }
+          else{
+            this.router.events.subscribe(event => {
+              if (event instanceof NavigationEnd && this.router.url === '/auth/user-lobby') {
+                window.location.reload();
+              }
+            });
             this.router.navigateByUrl('/auth/user-lobby');
+          }
 
           this.router.events.subscribe(event => {
             if (event instanceof NavigationEnd && this.router.url === '/') {
