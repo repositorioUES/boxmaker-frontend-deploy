@@ -1,6 +1,13 @@
 .full-width{
     margin-left: 1%;
   }
+
+  ::ng-deep.mdc-notched-outline {
+    /*change color of underline*/
+    background-color: rgba(255, 255, 255, 0.849) !important;
+    border-radius: 5% !important;
+    z-index: -2 !important;
+  }
   
   .center-container {
     display: flex;
@@ -27,10 +34,6 @@
 
   .text-color{
     color: rgb(224, 224, 224);
-  }
-
-  .back-color{
-    background-color: rgb(224, 224, 224);
   }
 
   .big-text {

@@ -2,6 +2,13 @@
   margin-left: 0.1%;
 }
 
+::ng-deep.mdc-notched-outline {
+  /*change color of underline*/
+  background-color: rgba(255, 255, 255, 0.849) !important;
+  border-radius: 5% !important;
+  z-index: -2 !important;
+}
+
 .full-width2 {
   margin-left: 2.7%;
   margin-right: 0;
@@ -43,8 +50,3 @@
 .text-color{
   color: rgb(224, 224, 224);
 }
-
-.back-color{
-  background-color: rgb(224, 224, 224);
-}
-

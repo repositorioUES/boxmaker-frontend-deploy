@@ -32,12 +32,12 @@
         <h1 class="text-center">Inicio de sesión</h1>
         <form (ngSubmit)="login()" autocomplete="off" [formGroup]="loginForm">
 
-          <mat-form-field class="full-width back-color" appearance="outline">
+          <mat-form-field class="full-width" appearance="outline">
             <mat-label >Nombre de usuario</mat-label>
             <input formControlName="userName" id="username"  type="text" matInput placeholder="Digite su nombre de usuario">
           </mat-form-field>
 
-          <mat-form-field class="full-width back-color" appearance="outline">
+          <mat-form-field class="full-width" appearance="outline">
             <mat-label >Contraseña</mat-label>
             <input formControlName="password" id="password" type="password" matInput placeholder="Digite su contraseña">
           </mat-form-field>
