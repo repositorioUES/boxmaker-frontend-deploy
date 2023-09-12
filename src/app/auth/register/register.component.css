@@ -39,3 +39,8 @@
   background-color: #ffffff31; /* Cambia el color de fondo a azul (#007bff) */
   color: white; /* Cambia el color del texto a blanco */
 }
+
+.text-color{
+  color: rgb(224, 224, 224);
+}
+

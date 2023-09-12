@@ -33,12 +33,12 @@
         <form (ngSubmit)="login()" autocomplete="off" [formGroup]="loginForm">
 
           <mat-form-field class="full-width" appearance="outline">
-            <mat-label>Nombre de usuario</mat-label>
+            <mat-label class="text-color">Nombre de usuario</mat-label>
             <input formControlName="userName" id="username"  type="text" matInput placeholder="Digite su nombre de usuario">
           </mat-form-field>
 
           <mat-form-field class="full-width" appearance="outline">
-            <mat-label>Contraseña</mat-label>
+            <mat-label class="text-color">Contraseña</mat-label>
             <input formControlName="password" id="password" type="password" matInput placeholder="Digite su contraseña">
           </mat-form-field>
           <br>

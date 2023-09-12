@@ -25,6 +25,10 @@
     color: white; /* Cambia el color del texto a blanco */
   }
 
+  .text-color{
+    color: rgb(224, 224, 224);
+  }
+
   .big-text {
     font-size:200%;
     font-weight: bold;
