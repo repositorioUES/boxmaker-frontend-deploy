@@ -29,6 +29,10 @@
     color: rgb(224, 224, 224);
   }
 
+  .back-color{
+    background-color: rgb(224, 224, 224);
+  }
+
   .big-text {
     font-size:200%;
     font-weight: bold;
