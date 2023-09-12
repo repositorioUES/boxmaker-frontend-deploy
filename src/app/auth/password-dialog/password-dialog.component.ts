@@ -47,6 +47,17 @@ export class PasswordDialogComponent {
   }
 
   changePassword(data: any){
+
+    if(!data.password || !data.newPassword){
+      this.toast.error('La contraseña Anteriror y la Nueva, son obligatorias', '', {
+        timeOut: 5000,
+        progressBar: true,
+        progressAnimation: 'decreasing',
+        positionClass: 'toast-top-right',
+      });
+      return
+    }
+
     this.authSrv.changePassword(data)
     .subscribe((resp:any) => {
       this.toast.success(resp.msg, '', {
@@ -55,7 +66,8 @@ export class PasswordDialogComponent {
         progressAnimation: 'decreasing',
         positionClass: 'toast-top-right',
       });
-      this.authSrv.$refresh.next(true); //Emitir que se debe refrescar la tabla del CAJA.component
+      // this.authSrv.$refresh.next(true); //Emitir que se debe refrescar la tabla del CAJA.component
+      this.dialogRef.close();
     }, (err)=> {
         console.warn(err) 
         this.toast.error(err.error.msg, '', {
@@ -65,7 +77,7 @@ export class PasswordDialogComponent {
           positionClass: 'toast-top-right',
         });
     })
-    this.dialogRef.close();
+    
   }
 
   nextInput(next: any, key: any) {
