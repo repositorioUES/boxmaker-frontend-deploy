@@ -1,4 +1,4 @@
-import { DatePipe } from '@angular/common';
+import { DatePipe, NgIf } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -22,6 +22,7 @@ export interface DialogData {
   _id: string, 
   activo: string, 
   bloqueado: string, 
+  firstLogin: string, 
 }
 
 @Component({
@@ -29,7 +30,7 @@ export interface DialogData {
   templateUrl: './password-dialog.component.html',
   styles: [],
   standalone: true,
-  imports: [MatDialogModule, MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule, DatePipe],
+  imports: [MatDialogModule, MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule, DatePipe, NgIf],
 })
 
 export class PasswordDialogComponent {

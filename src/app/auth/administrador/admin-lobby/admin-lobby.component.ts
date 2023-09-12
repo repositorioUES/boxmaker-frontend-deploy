@@ -16,13 +16,23 @@ export class AdminLobbyComponent implements OnInit{
 
   constructor(private router: Router, private authSrv: AuthService, private toast: ToastrService, private dialog: MatDialog){}
   
+  /* Obtener el  TOKEN*/
+  get token(): string {
+    return localStorage.getItem('token') || '';
+  }
+
+  /* Obtener el  userName*/
+  get userInSession(): string {
+    return localStorage.getItem('usuario') || '';
+  }
+
   fakeUser: Usuario =({
     primerNombre: 'Jhon', 
     segundoNombre: 'Doe', 
     primerApellido: 'fake', 
     segundoApellido: 'User', 
     email: 'fake', 
-    userName: 'fake', 
+    userName: this.userInSession, 
     fechaCreacion: 'fake', 
     passCaducidad: 'fake', 
     _id: 'fake', 
@@ -37,9 +47,9 @@ export class AdminLobbyComponent implements OnInit{
   expiration: string = '' // Mensaje y fecha de vencimiento de contraseña
 
   // Se suscribe para detecter cada vez que la variable $refreshTable cambie
-  refresh = this.authSrv.$refresh.subscribe(() => {
-    this.getProfile()
-  });
+  // refresh = this.authSrv.$refresh.subscribe(() => {
+  //   this.getProfile()
+  // });
 
   ngOnInit(): void {
     this.getProfile()
@@ -49,13 +59,17 @@ export class AdminLobbyComponent implements OnInit{
   }
 
   getProfile(){
-    const currToken = localStorage.getItem('token') || ''
     
-    this.authSrv.profile(currToken)
+    this.authSrv.profile(this.token)
     .subscribe((resp:any) => {
       this.loggedUser = resp.userData
       this.daysLeft = resp.warning.dias
       this.expiration = resp.warning.fecha
+
+      if (resp.firstLogin == true) {
+        // console.log('msg: ');
+        this.changePassword('   Es necesario que Cambie su Contraseña') 
+      }
 
     }, (err)=> {
       console.warn(err) 
@@ -68,7 +82,7 @@ export class AdminLobbyComponent implements OnInit{
     })
   }
 
-  changePassword(): void {
+  changePassword(msg: string): void {
 
       //Abrir el Dialog con la inof
       const dialogRef = this.dialog.open(PasswordDialogComponent, {
@@ -80,7 +94,8 @@ export class AdminLobbyComponent implements OnInit{
           segundoApellido: this.loggedUser.segundoApellido,
           email: this.loggedUser.email,
           passCaducidad: this.loggedUser.passCaducidad + " ( " + this.daysLeft + ")",
-          _id: this.loggedUser._id
+          _id: this.loggedUser._id,
+          firstLogin: msg
         },
       });
   
