@@ -277,7 +277,7 @@ export class HomeComponent implements OnInit {
         this.contenidos.push(extra)
 
         // Si los del JSON != a los de la BD entonces hay cambios sin guardar
-        if (this.cantidad != this.contenidos.length)
+        if (this.cantidad != (this.contenidos.length - 1))
           this.unsaved = true
 
         // // Hacer Scroll hasta donde convenga -----------------------------------------------------
