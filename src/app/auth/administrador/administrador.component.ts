@@ -35,9 +35,44 @@ export class AdministradorComponent implements OnInit {
     this.loggedUser = localStorage.getItem('usuario')?.replace(/"+/g,'') || ''
   }
   
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  // applyFilter(event: Event) {
+  //   const filterValue = (event.target as HTMLInputElement).value;
+  //   this.dataSource.filter = filterValue.trim().toLowerCase();
+  // }
+
+  applyFilter(event: Event){
+    const filterValue = (event.target as HTMLInputElement).value.toLowerCase();
+    let match: Usuario[] = []
+    for (let i = 0; i < this.usuarios.length; i++) {
+      const fechaUTC = this.usuarios[i].fechaCreacion.substring(0, 10).split('-')
+      const horaUTC = this.usuarios[i].fechaCreacion.substring(11, 16).split(':')
+      console.log(horaUTC);
+      const horaLocal = parseInt(horaUTC[0]) - 6
+      let dia = parseInt(fechaUTC[2])
+      let mes = parseInt(fechaUTC[1])
+  
+      if (horaLocal < 0) {
+        console.log('dia anterior');
+        dia = parseInt(fechaUTC[2]) - 1
+        if (dia < 0) {
+          mes = parseInt(fechaUTC[1]) - 1
+        }
+      }
+
+      const f = (dia < 10 ? '0'+dia.toString() : dia.toString()) + '/' + (mes < 10 ? '0'+mes.toString() : mes.toString()) + '/' + fechaUTC[0]
+      console.log(f);
+ 
+      if (this.usuarios[i].userName.toLowerCase().includes(filterValue) ||
+          this.usuarios[i].primerNombre.toLowerCase().includes(filterValue) ||
+          this.usuarios[i].primerApellido.toLowerCase().includes(filterValue) ||
+          f.includes(filterValue) ) {
+        
+            match.push(this.usuarios[i])
+      }
+    }
+
+    this.dataSource = new MatTableDataSource(match);
+    match = []
   }
   
   cargarUsuarios(){
